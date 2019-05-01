@@ -24,6 +24,4 @@ public class CategoriaResource {
 		
 		return lista;
 	}
-	
-	
 }
