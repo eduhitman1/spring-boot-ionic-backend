@@ -1,6 +1,8 @@
 package com.eduardo.cursomc.resouces;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.eduardo.cursomc.domain.Categoria;
+import com.eduardo.cursomc.dto.CategoriaDTO;
 import com.eduardo.cursomc.services.CategoriaService;
 
 @RestController
@@ -29,7 +32,7 @@ public class CategoriaResource {
 	
 	
 	
-	//METODO DE INSERÇÃO
+	//METODO DE INSERÇÃO NO *ENDPOINT
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void>  insert(@RequestBody  Categoria obj){
 		obj = service.insert(obj);
@@ -39,7 +42,7 @@ public class CategoriaResource {
 	}
 	
 	
-	//METODO DE UPDATE
+	//METODO DE UPDATE    NO *ENDPOINT
 	@RequestMapping(value= "/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
 		obj.setId(id);
@@ -47,10 +50,20 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	//METODO DE DELETE
+	//METODO DE DELETE    NO *ENDPOINT
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)           // PASSANDO O ID DA CATEGORIA
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {        // pathvariable é para identificar o id value
 	service.delete(id);
 	return ResponseEntity.noContent().build();
 	}
+	
+	//METODO DE LISTAGEM  NO *ENDPOINT
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> findAll() { 
+		List<Categoria> list = service.findAll();     
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);       	 
+	}
+	
+	
 }
