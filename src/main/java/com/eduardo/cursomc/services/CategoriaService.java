@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.eduardo.cursomc.domain.Categoria;
@@ -45,10 +48,14 @@ public class CategoriaService {
     	}
     }
     
+    //METÓDO DE LISTAGEM NO *ENDPOINT
     public List<Categoria> findAll(){
     	return repo.findAll();
     }
-    
-    
+    //METÓDO DE LISTAGEM POR PAGINAÇÃO, NÃO PUXANDO TODA LISTAGEM
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+    	PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
+        return repo.findAll(pageRequest);
+    }
     
 }
