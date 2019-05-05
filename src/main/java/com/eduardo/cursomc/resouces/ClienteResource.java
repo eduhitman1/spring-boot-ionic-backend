@@ -18,7 +18,7 @@ public class ClienteResource {
 	private ClienteService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)           // PASSANDO O ID DA CATEGORIA
-	public ResponseEntity<?> find(@PathVariable Integer id) {        // pathvariable é para identificar o id value 
+	public ResponseEntity<Cliente> find(@PathVariable Integer id) {        // pathvariable é para identificar o id value 
 		
 		
 		Cliente obj = service.find(id);                            // BUSCANDO O METÓDO NA CLASS categoriaService 

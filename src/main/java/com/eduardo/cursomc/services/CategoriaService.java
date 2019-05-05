@@ -25,7 +25,13 @@ public class CategoriaService {
     //METÓDO DE INSERÇÃO
     public Categoria insert(Categoria obj) {
     	obj.setId(null);
-    	return repo.save(obj);     // REPONSE SAVE OBJ
+    	return repo.save(obj);     // RESPONSE SAVE OBJ
+    }
+    
+    //METÓDO DE UPDATE
+    public Categoria update(Categoria obj) {
+    	find(obj.getId());         // ESTÁ PUCHANDO O METÓDO ACIMA FIND
+    	return repo.save(obj);     // RESPONSE UPDATE OBJ
     }
     
 
