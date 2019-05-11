@@ -35,8 +35,10 @@ public class CategoriaService {
     
     //METÓDO DE UPDATE  NO *ENDPOINT
     public Categoria update(Categoria obj) {
-    	find(obj.getId());         // ESTÁ PUCHANDO O METÓDO ACIMA FIND
-    	return repo.save(obj);     // RESPONSE UPDATE OBJ
+    Categoria newObj = find(obj.getId());         // ESTÁ PUCHANDO O METÓDO ACIMA FIND
+    updateData(newObj, obj);
+    return repo.save(newObj);
+    //return repo.save(obj);     // RESPONSE UPDATE OBJ
     }
      
     //METÓDO DE DELETE NO *ENDPOINT
@@ -59,11 +61,15 @@ public class CategoriaService {
         return repo.findAll(pageRequest);
     }
     
+    private void updateData(Categoria newObj , Categoria obj) {
+    	newObj.setNome(obj.getNome());
+    	
+    }
+    
     
     public Categoria fromDTO(CategoriaDTO objDto) {
     	return new Categoria(objDto.getId(), objDto.getNome());
     }
-    
     
     
     
