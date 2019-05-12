@@ -2,22 +2,47 @@ package com.eduardo.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.eduardo.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
 	//DADOS DO CLIENTE
-	private String nome;
+    @NotEmpty(message="Preemchimento Obrigatório")           //MENSAGEM
+    @Length(min=5,max=120, message="O tamanho deve ser entre 5 e 80 caracteres")
+    private String nome;
+    
+    @NotEmpty(message="Preemchimento Obrigatório")           //MENSAGEM
+    @Email(message="E-mail Inválido")           //MENSAGEM
 	private String email;
-	private String cpfOuCnpj;
-	private Integer tipo;
+    
+	
+    @NotEmpty(message="Preemchimento Obrigatório")           //MENSAGEM
+    
+    private String cpfOuCnpj;
+	
+    private Integer tipo;
 	
 	//DADOS DO ENDERECO
-	private String logradouro;
-	private String numero;
+    @NotEmpty(message="Preemchimento Obrigatório")
+    private String logradouro;
+    @NotEmpty(message="Preemchimento Obrigatório")
+    private String numero;
+    
+    
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message="Preemchimento Obrigatório")
 	private String cep;
 	
+	@NotEmpty(message="Preemchimento Obrigatório")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
