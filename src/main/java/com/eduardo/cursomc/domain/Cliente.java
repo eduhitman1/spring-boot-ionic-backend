@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,8 @@ public class Cliente implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)   // definição da estratégia de geração de numero no banco
     private Integer id;
 	private String nome;
+	
+	@Column(unique=true)        // CHAVE UNIQUE NÃO PERMITE DADOS REPETIDOS
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
