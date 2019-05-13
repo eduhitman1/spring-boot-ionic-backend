@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 
 import com.eduardo.cursomc.domain.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")    // INDICADOR DE PAGAMENTO
 public class PagamentoComBoleto extends Pagamento{
 	private static final long serialVersionUID = 1L;
 	@JsonFormat(pattern="dd/MM/yyyy")
