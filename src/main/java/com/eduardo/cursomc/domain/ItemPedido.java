@@ -32,6 +32,14 @@ public class ItemPedido implements Serializable{
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+	
+	// CALCULANDO ITEN DE PEDIDOS
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+	
+	
+	
 	@JsonIgnore
 	public Pedido getPedido(){         // PARA TER ACESSO AO PRODUTO AO PEDIDO
 		return id.getPedido();
