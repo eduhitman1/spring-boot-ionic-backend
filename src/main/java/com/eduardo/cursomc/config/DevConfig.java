@@ -17,8 +17,8 @@ public class DevConfig {
 	@Autowired
 	private DBService dbService;
 
-	@Value("${spring.jpa.hibernate.ddl-auto}")
-	private String strategy;
+	@Value("${spring.jpa.hibernate.ddl-auto}")   // PARA NÃO TER QUE RECRIAR A BASE DE DADOS, CREAT
+	private String strategy;          //ESTRATEGIA PARA BANCO DE DADOS
 
 	@Bean
 	public boolean instantiateDatabase() throws ParseException {
