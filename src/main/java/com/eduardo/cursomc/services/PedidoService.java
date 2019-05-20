@@ -73,7 +73,7 @@ public class PedidoService {
       itemPedidoRepository.saveAll(obj.getItens());
       
       
-      emailService.sendOrderConfirmationEmail(obj);// CHAMADO A FUNÇÃO DE EMAIL
+      emailService.sendOrderConfirmationHtmlEmail(obj);// CHAMADO A FUNÇÃO DE EMAIL HMTL outra emailService.sendOrderConfirmationEmail(obj); 
       
       return obj;
     }
