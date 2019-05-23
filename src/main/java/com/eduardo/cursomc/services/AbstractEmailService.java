@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,6 +24,7 @@ public abstract class AbstractEmailService implements EmailService{
 	
 	@Autowired
 	private TemplateEngine templateEngine;
+	
 	
 	@Autowired
 	private JavaMailSender javaMailSender;      // INSTANCIO O MINIMESSAGE
@@ -45,7 +47,7 @@ public abstract class AbstractEmailService implements EmailService{
 		 return sm;
 	}
 	
-	
+
 	protected String htmlFromTemplatePedido(Pedido obj) {          //ENVIANDO PARA O TEMPLATES 
 		Context context = new Context();                            
 		context.setVariable("pedido",obj);               //CORRESPONDENCIA DO pedido COM O TEMPLATE
@@ -63,6 +65,7 @@ public abstract class AbstractEmailService implements EmailService{
 	
 	}
 
+	
 	protected MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException { 
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);

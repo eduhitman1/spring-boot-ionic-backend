@@ -35,13 +35,7 @@ public class PedidoResource {
 
 @RequestMapping(value="/{id}",method=RequestMethod.GET)           // PASSANDO O ID DA CATEGORIA
 	public ResponseEntity<Pedido> find(@PathVariable Integer id) {        // pathvariable é para identificar o id value 
-		
-		
 		Pedido obj = service.find(id);                            // BUSCANDO O METÓDO NA CLASS categoriaService 
 		return ResponseEntity.ok().body(obj);                        // CORPO DO OBJETO	 
-		
-		
-	    
-		
 	}
 }

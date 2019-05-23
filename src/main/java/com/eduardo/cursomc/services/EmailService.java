@@ -14,6 +14,5 @@ public interface EmailService {
 	
 	void sendOrderConfirmationHtmlEmail(Pedido obj);  // METODO DE EMAIL HTML
 	void sendHtmlEmail(MimeMessage msg);
-	
-	
+
 }
