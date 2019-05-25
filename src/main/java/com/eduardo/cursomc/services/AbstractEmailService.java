@@ -62,7 +62,6 @@ public abstract class AbstractEmailService implements EmailService{
 	}catch(MessagingException ex) {
 		sendOrderConfirmationEmail(obj);         //CASO NÃO DER CERTO O EMAIL HTML
 	}
-	
 	}
 
 	

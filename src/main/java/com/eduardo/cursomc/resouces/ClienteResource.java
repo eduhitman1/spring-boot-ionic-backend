@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +51,7 @@ public class ClienteResource {
 	}
 	
 	//METODO DE DELETE    NO *ENDPOINT
+	@PreAuthorize("hasAnyRole('ADMIN')")   // SOMENTE ADMINISTRADOR
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)           // PASSANDO O ID DA CATEGORIA
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {        // pathvariable é para identificar o id value
 	service.delete(id);
@@ -57,6 +59,7 @@ public class ClienteResource {
 	}
 	
 	//METODO DE LISTAGEM  NO *ENDPOINT
+	@PreAuthorize("hasAnyRole('ADMIN')")    // SOMENTE ADMINISTRADOR
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() { 
 		List<Cliente> list = service.findAll();     
