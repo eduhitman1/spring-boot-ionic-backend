@@ -66,6 +66,7 @@ public abstract class AbstractEmailService implements EmailService{
 	}
 
 	
+	
 	protected MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException { 
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);

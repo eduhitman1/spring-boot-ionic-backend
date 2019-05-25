@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Claims; //ARMAZENA AS REINVIDICAÇÕES DO TOKEN
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -25,4 +26,39 @@ public class JWTUtil {
 	      .signWith(SignatureAlgorithm.HS512, secret.getBytes())          //ALGORITMO DE TOKEM SECRET
 	      .compact();
 	}
+	
+	public boolean tokenValido(String token) {
+		Claims claims = getClaims(token);              //ARMAZENA AS REINVIDICAÇÕES DO TOKEN
+	    if(claims != null ) {
+	    	String username = claims.getSubject();
+	    	Date expirationDate = claims.getExpiration();   // 60 segundos
+	    	Date now = new Date(System.currentTimeMillis());
+	    	if(username != null && expirationDate != null && now.before(expirationDate) ) {
+	    		return true;
+	    	}
+	    }
+	    return false;
+	}
+	
+	public String  getUsername(String token) {
+		Claims claims = getClaims(token);              //ARMAZENA AS REINVIDICAÇÕES DO TOKEN
+	    if(claims != null ) {
+	    	return claims.getSubject();
+	    }
+	    return null;
+	}
+	
+	
+
+	private Claims getClaims(String token) {
+		try {
+		return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();   //RECUPERA OS CLAIMS APARTI DO TOKEN
+	}catch(Exception e) {
+		return null;
+	}
+		
+	}
+	
+	
+	
 }
