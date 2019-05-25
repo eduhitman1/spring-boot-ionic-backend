@@ -15,6 +15,7 @@ import org.thymeleaf.context.Context;
 
 import com.eduardo.cursomc.domain.Pedido;
 
+
 public abstract class AbstractEmailService implements EmailService{
 
 	@Value("${default.sender}")    // PUXANDO VALOR DA CLASS AbstractEmailService// edu.hitman01.eh@gmail.com
