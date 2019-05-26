@@ -9,7 +9,7 @@ import com.eduardo.cursomc.domain.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{   //CAMADA DE ACESSO A DADO (REPOSITORY)
 
-	@Transactional
+	@Transactional(readOnly=true)
 	Cliente findByEmail(String email);
 	 
 	
