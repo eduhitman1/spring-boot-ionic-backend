@@ -70,4 +70,9 @@ public class UserSS implements UserDetails{
 		return true;
 	}
 
+	public boolean hasRole(Perfil perfil) {          //TESTE SE POSSUI UM DADOS PERFIL
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}
+	
+	
 }
