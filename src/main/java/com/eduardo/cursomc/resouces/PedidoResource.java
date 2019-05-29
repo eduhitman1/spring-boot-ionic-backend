@@ -42,16 +42,13 @@ public class PedidoResource {
 	}
 
 //METODO DE LISTAGEM POR PAGINAÇÃO NO *ENDPOINT
-	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<Page<Pedido>> findPage(
-		@RequestParam(value="page",defaultValue="0")    Integer page, 
-		@RequestParam(value="linesPerPage",defaultValue="24")	Integer linesPerPage, 
-		@RequestParam(value="orderBy",defaultValue="instante")	String orderBy,             //ordenação por nome 
-		@RequestParam(value="direction",defaultValue="DESC")	String direction){         //ordenação por crescente
-		Page<Pedido> list = service.findPage(page,linesPerPage,orderBy,direction);     
-		return ResponseEntity.ok().body(list);       	 
-	}
-
-
-
+@RequestMapping(method=RequestMethod.GET)
+public ResponseEntity<Page<Pedido>> findPage(
+		@RequestParam(value="page", defaultValue="0") Integer page, 
+		@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+		@RequestParam(value="orderBy", defaultValue="instante") String orderBy, 
+		@RequestParam(value="direction", defaultValue="DESC") String direction) {
+	Page<Pedido> list = service.findPage(page, linesPerPage, orderBy, direction);
+	return ResponseEntity.ok().body(list);
+}
 }

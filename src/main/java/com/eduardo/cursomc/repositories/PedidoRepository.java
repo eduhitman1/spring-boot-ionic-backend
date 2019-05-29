@@ -13,8 +13,6 @@ import com.eduardo.cursomc.domain.Pedido;
 public interface PedidoRepository extends JpaRepository<Pedido, Integer>{   //CAMADA DE ACESSO A DADO (REPOSITORY)
 
 	@Transactional(readOnly=true)
-	Page<Pedido> findByCliente (Cliente cliente, Pageable pageRequest);
-	
-	
+	Page<Pedido> findByCliente(Cliente cliente, Pageable pageRequest);	
 	
 }

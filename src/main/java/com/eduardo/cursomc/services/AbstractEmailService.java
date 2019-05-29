@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.eduardo.cursomc.domain.Cliente;
 import com.eduardo.cursomc.domain.Pedido;
 
 
@@ -25,11 +26,8 @@ public abstract class AbstractEmailService implements EmailService{
 	@Autowired
 	private TemplateEngine templateEngine;
 	
-	
 	@Autowired
 	private JavaMailSender javaMailSender;      // INSTANCIO O MINIMESSAGE
-	
-	
 	
 	@Override   // SOBREESCREVENDO O METÓDO DA INTEFACE EmailService.Java
 	public void sendOrderConfirmationEmail(Pedido obj) {
@@ -48,6 +46,8 @@ public abstract class AbstractEmailService implements EmailService{
 	}
 	
 
+	
+	
 	protected String htmlFromTemplatePedido(Pedido obj) {          //ENVIANDO PARA O TEMPLATES 
 		Context context = new Context();                            
 		context.setVariable("pedido",obj);               //CORRESPONDENCIA DO pedido COM O TEMPLATE
@@ -75,5 +75,21 @@ public abstract class AbstractEmailService implements EmailService{
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
 		mmh.setText(htmlFromTemplatePedido(obj),true);
 		return mimeMessage;
+	}
+	
+	@Override
+	public void sendNewPasswordEmail(Cliente cliente, String newPass) {
+		SimpleMailMessage sm = prepareNewPasswordEmail(cliente, newPass);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage prepareNewPasswordEmail(Cliente cliente, String newPass) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(cliente.getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Solicitação de nova senha");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Nova senha: " + newPass);
+		return sm;
 	}
 }
