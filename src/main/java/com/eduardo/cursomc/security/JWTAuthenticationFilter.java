@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.eduardo.cursomc.dto.CredenciaisDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.mail.iap.Response;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -56,6 +57,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String username = ((UserSS) auth.getPrincipal()).getUsername();   //PUSH EMAIL IS CLIENTE
 		String token = jwtUtil.generateToken(username);              //PASSAGEN DE EMAIL
 		res.addHeader("Authorization", "Bearer"+token);
+		res.addHeader("access-control-expose-headers", "Authorization");
 	}
 	
 	
