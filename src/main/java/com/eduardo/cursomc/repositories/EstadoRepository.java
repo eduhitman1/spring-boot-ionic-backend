@@ -1,7 +1,10 @@
 package com.eduardo.cursomc.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eduardo.cursomc.domain.Estado;
 
@@ -10,6 +13,7 @@ public interface EstadoRepository extends JpaRepository<Estado, Integer>{   //CA
 
 	
 	
-	
+	@Transactional(readOnly=true)
+	public List<Estado> findAllByOrderByNome();
 	
 }
